@@ -80,7 +80,7 @@ mqtt_tmp.close()
 
 baudrate = 115200
 # delete the current init.lua to avoid bootloops
-executeCommand(args.device, baudrate, "file.remove(\"init.lua\")")
+executeCommand(args.device, baudrate, 'file.remove("init.lua")')
 # collect lua files
 files = [
     tmpdir + "/" + f for f in os.listdir(tmpdir)

@@ -1,5 +1,5 @@
 # ESPBlue
-Link the ESP8266 ESP-01 with Rust on the Blue Pill
+Link the ESP8266 ESP-01 with Rust on the Blue Pill  
 Tested Environment: Ubuntu 18.04.2 LTS
 
 # Setup ESP
@@ -10,6 +10,7 @@ Tested Environment: Ubuntu 18.04.2 LTS
         - WiFi
         - UART
         - MQTT
+        - tmr
     - helpful modules:
         - HTTP
         - Net
@@ -21,6 +22,7 @@ Tested Environment: Ubuntu 18.04.2 LTS
     - install esptool: ``sudo apt install esptool``
     - run the flash script
 - deploy the firmware extending lua scripts with the deployESP script
+    - requires ``pip3 install pyserial``
 # Links
 ## ESP
 - [Node MCU Firmware Documentation](https://nodemcu.readthedocs.io/en/master/)
