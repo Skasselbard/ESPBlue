@@ -10,7 +10,7 @@ Tested Environment: Ubuntu 18.04.2 LTS
         - WiFi
         - UART
         - MQTT
-        - tmr
+        - timer
     - helpful modules:
         - HTTP
         - Net

@@ -5,7 +5,7 @@ function start_mqtt(mqttName)
     mqttClient:lwt("status/ip/"..mqttName, "offline")
     mqttTimer = tmr.create()
     mqttTimer:alarm(5000,tmr.ALARM_AUTO, function(t) 
-        print("Attempting to connect to mqtt")
+        log("Attempting to connect to mqtt")
         mqttClient:connect(getSetting("mqtt_server"), 1883)
     end)
     register_callbacks()
@@ -23,7 +23,7 @@ function register_callbacks()
 
     mqttClient:on("connect", function(c) 
         mqttTimer:stop()
-        print("mqtt connected as: "..mqttName)
+        log("mqtt connected as: "..mqttName)
         client = c
         client:publish("status/ip/"..mqttName, wifi.sta.getip(),0,0)
         -- add your subscription here
@@ -35,7 +35,7 @@ function register_callbacks()
     end)
 
     mqttClient:on("offline", function(c)
-        print("mqtt disconnected")
+        log("mqtt disconnected")
         client = nil
     end)
 
@@ -43,9 +43,9 @@ function register_callbacks()
         if topic == "control/"..mqttName or topic == "control/all" then
             node.input(message)
         else
-        print(topic .. ":" ) 
+        log(topic .. ":" ) 
         if message ~= nil then
-            print(message)
+            log(message)
         end
         end
     end)

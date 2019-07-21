@@ -2,23 +2,26 @@
 function connectWifi()
     local ssid = "{ssid}" -- will be rplaced by the deploy script
     local pwd = "{pwd}" -- will be rplaced by the deploy script
+    local hostname = "{name}" -- will be replaced by the deploy script
     if (ssid == nil) or (pwd == nil) or (ssid:len() < 1) or (pwd:len() < 1) then
-        print("Error while loading wifi settings")
+        log("Error while loading wifi settings")
     else
         wifi.setmode(wifi.STATION)
         wifi.sta.autoconnect(1)
         local cfg = {}
         cfg.ssid = ssid
         cfg.pwd = pwd
+
         cfg.got_ip_cb = function(t)
-            print("Connected to network, received ip:", t.IP)
+            log("Connected to network, received ip: " .. t.IP)
             wifiTimer:stop()
             if mqttClient ~= nil then
                 mqttClient:connect(getSetting("mqtt_server"), 1883)
             end
         end
         wifi.sta.config(cfg)
-        wifi.sta.connect(function(x) print("Connected to wifi, waiting for ip...") end)
+        wifi.sta.sethostname(hostname)
+        wifi.sta.connect(function(x) log("Connected to wifi, waiting for ip...") end)
     end
 end
 
